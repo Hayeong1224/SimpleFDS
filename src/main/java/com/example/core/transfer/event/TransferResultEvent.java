@@ -1,10 +1,14 @@
 package com.example.core.transfer.event;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
+@ToString // 로그 디버깅용
 public class TransferResultEvent {
 
     private final Long transferId;

@@ -2,6 +2,7 @@ package com.example.core.fds.consumer;
 
 import com.example.core.fds.service.FdsService;
 import com.example.core.transfer.event.TransferRequestedEvent;
+import com.example.core.transfer.event.TransferResultEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -34,7 +35,7 @@ public class TransferRequestedConsumer {
     )
     public void consume(TransferRequestedEvent event) {
         log.info("[FDS] TransferRequestedEvent 수신: {}", event);
-        fdsService.handle(event);
-        log.info("[FDS] handle 호출 완료: transferId={}", event.getTransferId());
+        TransferResultEvent result = fdsService.handle(event);
+        log.info("[FDS] detection result: {}", result);
     }
 }
