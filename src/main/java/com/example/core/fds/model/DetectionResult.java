@@ -9,12 +9,11 @@ package com.example.core.fds.model;
 import java.util.List;
 
 public record DetectionResult(
-        boolean suspicious,
         int score,
         List<String> reasons
 ) {
     public static DetectionResult ok() {
-        return new DetectionResult(false, 0, List.of()); // 불변 리스트 생성
+        return new DetectionResult(0, List.of()); // 불변 리스트 생성
     }
 
 }
