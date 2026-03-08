@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class SelfTransferRule implements FdsRule{
     @Override
     public String code() {
-        return "SELF_TRANSFER";
+        return Rules.SELF_TRANSFER;
     }
 
     @Override

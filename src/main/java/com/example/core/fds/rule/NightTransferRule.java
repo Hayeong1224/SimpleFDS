@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 public class NightTransferRule implements FdsRule{
     @Override
     public String code() {
-        return "NIGHT_TRANSFER";
+        return Rules.NIGHT_TRANSFER;
     }
 
     @Override
     public int weight() {
-        return 30;
+        return 20;
     }
 
     @Override

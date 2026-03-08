@@ -1,8 +1,10 @@
 package com.example.core.fds.consumer;
 
 import com.example.core.fds.service.FdsService;
+import com.example.core.kafka.KafkaTopics;
 import com.example.core.transfer.event.TransferRequestedEvent;
 import com.example.core.transfer.event.TransferResultEvent;
+import com.example.core.transfer.messaging.TransferEventPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -15,27 +17,23 @@ public class TransferRequestedConsumer {
             LoggerFactory.getLogger(TransferRequestedConsumer.class);
 
     private final FdsService fdsService;
+    private final TransferEventPublisher transferEventPublisher;
 
-    public TransferRequestedConsumer(FdsService fdsService) {
+    public TransferRequestedConsumer(FdsService fdsService,
+                                     TransferEventPublisher transferEventPublisher) {
+
         this.fdsService = fdsService;
+        this.transferEventPublisher = transferEventPublisher;
     }
 
-//    @KafkaListener(
-//            topics = "transfer.requested",
-//            groupId = "fds-group-debug"
-//    )
-//    public void consume(String message) {
-//        log.info("RAW MESSAGE: {}", message);
-//    }
-
-
     @KafkaListener(
-            topics = "transfer.requested",
+            topics = KafkaTopics.TRANSFER_REQUESTED,
             containerFactory = "transferRequestedKafkaListenerContainerFactory"
     )
     public void consume(TransferRequestedEvent event) {
         log.info("[FDS] TransferRequestedEvent 수신: {}", event);
         TransferResultEvent result = fdsService.handle(event);
         log.info("[FDS] detection result: {}", result);
+        transferEventPublisher.publishTransferResult(result);
     }
 }

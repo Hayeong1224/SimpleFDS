@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class HighAmountRule implements FdsRule{
     @Override
-    public String code() { return "HIGH_AMOUNT"; }
+    public String code() {
+        return Rules.HIGH_AMOUNT;
+    }
 
     @Override
     public int weight() { return 50; }

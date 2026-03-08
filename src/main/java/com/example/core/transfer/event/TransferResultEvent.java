@@ -8,19 +8,14 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor // Jackson 역직렬화
+@AllArgsConstructor
 @ToString // 로그 디버깅용
 public class TransferResultEvent {
 
-    private final Long transferId;
-    private final TransferResultType resultType;
-    private final String reason;
-    private final LocalDateTime occuredAt;
-
-    public TransferResultEvent (Long transferId, TransferResultType resultType, String reason) {
-        this.transferId = transferId;
-        this.resultType = resultType;
-        this.reason = reason;
-        this.occuredAt = LocalDateTime.now();
-    }
+    private Long transferId;
+    private TransferResultType resultType;
+    private String reason;
+    private LocalDateTime occuredAt;
 
 }

@@ -2,5 +2,6 @@ package com.example.core.transfer.event;
 
 public enum TransferResultType {
     APPROVED,
-    REJECTED
+    REJECTED,
+    REQUIRE_ADDITIONAL_AUTH
 }
